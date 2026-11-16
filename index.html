@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents IA × Médias</title>
+<meta name="description" content="Support interactif de la formation Brand Academy « Agents IA : les mettre au travail sur vos campagnes retail media et médias à la performance » — quiz, cartographie des tâches, grille de scoring, brief d'agent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FBB424; --yel:#F1E40D; --bg:#0D0D0D; --bg2:#1A1A1A; --card:#232323; --line:#333;
+  --txt:#FFFFFF; --mut:#B3B3B3; --ok:#37AA57; --ko:#EA4335;
+  --disp:'Big Shoulders Display','Helvetica Neue',Arial,sans-serif; --body:'DM Sans','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--txt);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+nav{position:sticky;top:0;z-index:10;background:rgba(13,13,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold)}
+nav .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;height:52px;scrollbar-width:none}
+nav a{color:var(--txt);text-decoration:none;font-size:14px;font-weight:600;padding:6px 12px;border-radius:999px;white-space:nowrap}
+nav a:hover,nav a.on{background:var(--gold);color:#000}
+nav .brand{font-family:var(--disp);font-size:20px;color:var(--gold);padding-left:0;margin-right:8px;text-transform:uppercase}
+nav .brand:hover{background:none;color:var(--gold)}
+h1,h2,h3{font-family:var(--disp);text-transform:uppercase;line-height:1;letter-spacing:-.005em}
+h1{font-size:clamp(48px,9vw,104px);font-weight:900}
+h2{font-size:clamp(36px,6vw,64px);font-weight:900;margin-bottom:8px}
+h3{font-size:26px;font-weight:700;margin:40px 0 16px}
+.eyebrow{color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.lead{font-size:20px;color:var(--mut);max-width:760px}
+.pill{display:inline-block;background:var(--gold);color:#000;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:7px 16px;border-radius:999px}
+header.hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+header.hero h1 span{color:var(--yel)}
+header.hero .sub{font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--gold);margin:18px 0 28px}
+header.hero .who{margin-top:24px;color:var(--mut)}
+header.hero .who b{color:var(--txt)}
+section{padding:72px 0;border-bottom:1px solid var(--line)}
+section.alt{background:var(--bg2)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g5{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{background:var(--card);border-radius:14px;padding:20px;border:1px solid transparent}
+.card.hl{border-color:var(--gold)}
+.card h4{font-size:18px;margin-bottom:8px;color:var(--yel)}
+.card p{color:var(--mut);font-size:15px}
+.num{font-family:var(--disp);font-weight:900;font-size:44px;color:var(--yel);line-height:1;margin-bottom:8px}
+.prog{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:32px}
+.prog .card .num{font-size:36px}
+.prog .d{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+.prog b{display:block;margin:8px 0 6px;line-height:1.3}
+.prog p{font-size:13px}
+ol.obj{list-style:none;counter-reset:o;margin-top:28px;display:grid;gap:10px}
+ol.obj li{counter-increment:o;display:flex;gap:14px;align-items:flex-start;font-size:18px}
+ol.obj li::before{content:counter(o,decimal-leading-zero);font-family:var(--disp);font-weight:900;background:var(--gold);color:#000;border-radius:50%;min-width:40px;height:40px;display:grid;place-items:center;font-size:18px}
+.tablewrap{overflow-x:auto;margin-top:24px;border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:15px}
+th{background:var(--gold);color:#000;text-align:left;padding:12px;font-weight:700}
+td{padding:12px;border-top:1px solid var(--line);vertical-align:top;color:var(--mut)}
+td:first-child{color:var(--gold);font-weight:700}
+td:last-child{color:var(--txt);font-weight:600}
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:20px}
+.loop .pill{background:var(--yel)}
+.loop i{color:var(--gold);font-style:normal;font-size:22px}
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.filters button{font:600 14px var(--body);border:1px solid var(--line);background:transparent;color:var(--txt);padding:8px 14px;border-radius:999px;cursor:pointer}
+.filters button.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.task{position:relative;overflow:hidden}
+.task .tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:999px;color:#000;margin-bottom:10px}
+.task dl{margin-top:10px;font-size:14px}
+.task dt{color:var(--gold);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-top:10px}
+.task dd{color:var(--mut)}
+.s-pret{background:var(--yel)} .s-supervise{background:var(--gold)} .s-humain{background:var(--mut)}
+/* autonomy */
+.auto{display:grid;grid-template-columns:72px 1fr;gap:0;border-radius:14px;overflow:hidden;background:var(--card)}
+.auto .lv{display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:30px;color:#000}
+.auto .bd{padding:16px 18px}
+.auto .bd b{font-size:18px}
+.auto .bd p{color:var(--mut);font-size:15px}
+.auto .bd small{color:var(--gold);font-size:13px}
+/* checklist */
+.check{list-style:none;display:grid;gap:8px;margin-top:16px}
+.check label{display:flex;gap:12px;align-items:flex-start;background:var(--card);padding:14px 16px;border-radius:12px;cursor:pointer}
+.check input{accent-color:var(--gold);width:20px;height:20px;margin-top:2px;flex-shrink:0}
+/* quiz */
+.quiz{background:var(--bg2);border:1px solid var(--gold);border-radius:18px;padding:28px;margin-top:40px}
+.quiz h3{margin:0 0 6px}
+.quiz .q{margin-top:22px}
+.quiz .q > b{display:block;font-size:18px;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left;font:15px var(--body);background:var(--card);color:var(--txt);border:1px solid var(--line);padding:12px 14px;border-radius:10px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--gold)}
+.opts button.ok{background:rgba(55,170,87,.18);border-color:var(--ok)}
+.opts button.ko{background:rgba(234,67,53,.15);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:8px;font-size:14px;color:var(--mut);display:none}
+.expl.show{display:block}
+.score{margin-top:22px;font-weight:700;color:var(--yel);min-height:1.5em}
+.btn{font:700 14px var(--body);text-transform:uppercase;letter-spacing:.05em;background:var(--gold);color:#000;border:0;padding:12px 20px;border-radius:999px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+/* atelier */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.scorer{display:grid;gap:16px;margin-top:20px}
+.taskrow{background:var(--card);border-radius:14px;padding:18px}
+.taskrow input[type=text]{width:100%;font:600 17px var(--body);background:var(--bg);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px}
+.crit{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:10px;align-items:center;margin-top:12px}
+.crit .nm{font-weight:700;font-size:14px}
+.crit .nm small{display:block;color:var(--mut);font-weight:400;font-size:12px}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots button{font:700 14px var(--body);min-width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--txt);cursor:pointer}
+.dots button.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.dots .lab{font-size:12px;color:var(--mut);align-self:center;margin-left:6px}
+.verdict{margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.verdict .tot{font-family:var(--disp);font-size:40px;font-weight:900;color:var(--yel)}
+.verdict .vd{font-weight:700}
+.verdict .vd small{display:block;color:var(--mut);font-weight:400}
+.note{font-size:14px;color:var(--gold);margin-top:12px}
+form.brief{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:20px}
+form.brief label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px;color:var(--yel)}
+form.brief textarea{font:15px var(--body);background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:76px;resize:vertical}
+form.brief textarea:focus,.taskrow input:focus{outline:2px solid var(--gold);border-color:transparent}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;font-weight:700;padding:10px 18px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.reflex{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:center;background:var(--card);border-radius:14px;padding:16px}
+.reflex .n{font-family:var(--disp);font-weight:900;font-size:36px;background:var(--yel);color:#000;border-radius:10px;height:56px;display:grid;place-items:center}
+.reflex b{font-size:18px} .reflex p{color:var(--mut);font-size:15px}
+footer{padding:40px 0 60px;color:var(--mut);font-size:14px}
+@media (max-width:600px){
+  section{padding:52px 0}
+  .crit{grid-template-columns:1fr}
+  .dots .lab{width:100%;margin:4px 0 0}
+  .quiz{padding:20px}
+}
+@media print{
+  nav,header.hero,section:not(#atelier),footer,.actions,.steps,.toast{display:none!important}
+  body{background:#fff;color:#000}
+  #atelier{border:0;padding:0}
+  .taskrow,form.brief textarea,.card{background:#fff!important;color:#000!important;border:1px solid #999!important}
+  .crit .nm small,.dots .lab{color:#333}
+}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top">Agents IA</a>
+  <a href="#programme">Programme</a><a href="#s1">01 Définir</a><a href="#s2">02 Tâches</a><a href="#s3">03 Garder la main</a><a href="#atelier">Atelier</a><a href="#synthese">Synthèse</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <p class="eyebrow" id="host"></p>
+  <h1>Agents IA :<br><span>les mettre au travail</span></h1>
+  <p class="sub">sur vos campagnes retail media et médias à la performance</p>
+  <span class="pill" id="when"></span>
+  <p class="who" id="who"></p>
+</div></header>
+
+<section id="programme"><div class="wrap">
+  <p class="eyebrow">Programme</p>
+  <h2>Deux heures, un brief</h2>
+  <p class="lead">Des démos sur des comptes anonymisés, trois quiz, puis un atelier sur vos propres tâches. Gardez cette page ouverte pendant la session.</p>
+  <div class="prog" id="prog"></div>
+  <h3>À la fin, vous saurez…</h3>
+  <ol class="obj" id="obj"></ol>
+</div></section>
+
+<section id="s1" class="alt"><div class="wrap">
+  <p class="eyebrow">01 · 9h40</p>
+  <h2>Un agent IA, c'est quoi&nbsp;?</h2>
+  <p class="lead">Test simple : est-ce qu'il choisit lui-même l'étape suivante ? Si non, ce n'est pas un agent.</p>
+  <div class="tablewrap"><table id="compare"></table></div>
+  <h3>Les cinq pièces d'un agent</h3>
+  <div class="grid g5" id="anatomy"></div>
+  <div class="loop" id="loop"></div>
+  <h3>MCP, la prise commune</h3>
+  <p class="lead" id="mcpWhat"></p>
+  <div class="grid g2" id="mcpChanges" style="margin-top:20px"></div>
+  <div id="quiz-1"></div>
+</div></section>
+
+<section id="s2"><div class="wrap">
+  <p class="eyebrow">02 · 10h05</p>
+  <h2>Quelles tâches confier dès aujourd'hui&nbsp;?</h2>
+  <p class="lead">Dix familles de tâches retail media et performance, classées par maturité. Filtrez.</p>
+  <div class="filters" id="filters"></div>
+  <div class="grid g3" id="tasks"></div>
+  <h3>Ce qu'un agent fait mal (aujourd'hui)</h3>
+  <div class="grid g5" id="limits"></div>
+  <div id="quiz-2"></div>
+</div></section>
+
+<section id="s3" class="alt"><div class="wrap">
+  <p class="eyebrow">03 · 10h35</p>
+  <h2>Comment garder la main&nbsp;?</h2>
+  <h3>Cinq prérequis de données</h3>
+  <div class="grid g5" id="prereqs"></div>
+  <h3>Quatre niveaux d'autonomie</h3>
+  <div class="grid" id="autonomy"></div>
+  <p class="note">Règle de départ : N0 et N1 partout, N2 sur les tâches éprouvées, N3 seulement avec budget plafonné et journal.</p>
+  <div class="grid g2" style="margin-top:8px">
+    <div><h3>Gouvernance</h3><div class="grid" id="gov"></div></div>
+    <div><h3>Coûts et modèle</h3><div class="grid" id="costs"></div></div>
+  </div>
+  <h3>Prouver la valeur : l'incrémentalité</h3>
+  <div class="grid g3" id="incr"></div>
+  <h3>Dix questions pour votre agence ou votre éditeur</h3>
+  <p class="lead">Cochez celles qui ont déjà une réponse claire chez vos prestataires.</p>
+  <ul class="check" id="questions"></ul>
+  <div class="actions"><button class="btn ghost" id="copyQ">Copier les 10 questions</button></div>
+  <div id="quiz-3"></div>
+</div></section>
+
+<section id="atelier"><div class="wrap">
+  <p class="eyebrow">04 · 11h00 · Atelier</p>
+  <h2>Votre premier brief d'agent</h2>
+  <div class="steps" id="steps"></div>
+  <h3>1 · Notez trois tâches</h3>
+  <p class="lead">Quatre critères notés de 1 à 5. Le total guide la décision.</p>
+  <div class="scorer" id="scorer"></div>
+  <p class="note" id="veto"></p>
+  <h3>2 · Rédigez le brief</h3>
+  <p class="lead">Pré-rempli avec votre tâche la mieux notée. Tout reste dans votre navigateur.</p>
+  <form class="brief" id="brief"></form>
+  <div class="actions">
+    <button class="btn" id="copyBrief">Copier le brief</button>
+    <button class="btn ghost" id="dlBrief">Télécharger (.md)</button>
+    <button class="btn ghost" id="printBrief">Imprimer / PDF</button>
+    <button class="btn ghost" id="resetBrief">Tout effacer</button>
+  </div>
+</div></section>
+
+<section id="synthese" class="alt"><div class="wrap">
+  <p class="eyebrow">05 · 11h20</p>
+  <h2>Cinq réflexes à garder</h2>
+  <div class="grid" id="reflexes" style="margin-top:24px"></div>
+  <h3>Vos trois prochaines étapes</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Cette semaine</h4><p>Partagez votre brief avec votre équipe et votre agence. Posez les 10 questions.</p></div>
+    <div class="card"><h4>Ce mois-ci</h4><p>Lancez un agent en lecture seule (N0-N1) sur la tâche la mieux notée. Notez la baseline.</p></div>
+    <div class="card"><h4>Dans 6 semaines</h4><p>Comparez au témoin. Décidez : arrêter, continuer ou monter d'un niveau d'autonomie.</p></div>
+  </div>
+  <h3>Kit participant</h3>
+  <div class="actions" style="margin-top:0"><a class="btn" href="kit-participant-agents-ia.pdf" download style="text-decoration:none">Télécharger le kit (PDF)</a></div>
+  <p class="lead" style="margin-top:10px;font-size:16px">Cartographie des tâches, grille de scoring, brief d'agent à imprimer, mémo « garder la main ».</p>
+  <h3>Ressources</h3>
+  <div class="grid g2" id="res"></div>
+</div></section>
+
+<footer><div class="wrap" id="foot"></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const D = {"meta": {"title": "Agents IA : les mettre au travail sur vos campagnes retail media & performance", "short": "Agents IA × retail media & performance", "date": "Mercredi 3 février 2027", "time": "9h30 – 11h30 · distanciel", "host": "Brand Academy · Union des marques", "speaker": "Alessandro Poletti", "speaker_role": "Product Lead, agents média · Jellyfish (The Brandtech Group)"}, "programme": [["9h30", "10 min", "Introduction et cadrage", "Tour de table, objectifs, règles du jeu"], ["9h40", "25 min", "Un agent IA, c'est quoi (et ce n'est pas quoi) ?", "Chatbot vs automatisation vs agent · MCP · démo"], ["10h05", "30 min", "Quelles tâches médias confier à un agent dès aujourd'hui ?", "Cartographie des tâches · démos · résultats et limites"], ["10h35", "25 min", "Comment garder la main ?", "Données, validation humaine, gouvernance, coûts, incrémentalité"], ["11h00", "20 min", "Atelier d'application", "3 tâches → grille de scoring → premier brief d'agent"], ["11h20", "10 min", "Synthèse et conclusion", "5 réflexes · ressources · prochaines étapes"]], "objectifs": ["Distinguer un agent IA d'un chatbot et d'une automatisation classique", "Repérer les tâches retail media et performance à confier à un agent, et celles qui restent humaines", "Évaluer un cas d'usage : valeur, qualité des données, risque en plateforme, mesurabilité", "Définir les garde-fous : accès aux données, validation, gouvernance, coûts, choix du modèle, incrémentalité", "Repartir avec un premier brief d'agent rédigé sur une de vos tâches"], "compare": {"cols": ["Chatbot", "Automatisation classique", "Agent IA"], "rows": [["Ce qu'il fait", "Répond à une question", "Exécute une règle fixe", "Poursuit un objectif en plusieurs étapes"], ["Accès aux outils", "Aucun (ou recherche web)", "Une plateforme, un script", "Plusieurs outils : API, fichiers, comptes publicitaires"], ["Décide de la suite ?", "Non, attend la question suivante", "Non, suit le « si… alors… »", "Oui : observe, choisit l'étape suivante, vérifie"], ["Gère l'imprévu", "Non", "Non (casse ou ignore)", "Oui, dans les limites qu'on lui donne"], ["Exemple média", "« Explique-moi le ROAS »", "« Si CPA > 50 €, baisser l'enchère de 10 % »", "« Analyse les termes de recherche des 90 derniers jours et propose les négatifs »"]]}, "anatomy": [["Modèle", "Le « cerveau » : un LLM (Claude, Gemini, GPT…) qui comprend la consigne et raisonne."], ["Outils", "Ce qu'il peut faire : lire un compte Google Ads, interroger Amazon Ads, écrire un fichier, envoyer un message."], ["Données", "Ce qu'il sait : historique de performance, flux produits, taxonomie de nommage, brief, règles métier."], ["Boucle de décision", "Observer → raisonner → agir → vérifier, jusqu'à atteindre l'objectif ou demander de l'aide."], ["Garde-fous", "Ce qu'il n'a pas le droit de faire seul : dépenser, publier, supprimer. Validation humaine aux points clés."]], "loop": ["Observer", "Raisonner", "Agir", "Vérifier"], "mcp": {"what": "MCP (Model Context Protocol) : un standard ouvert pour brancher un modèle d'IA sur des outils et des données. Le « port USB-C » des agents : une prise commune au lieu d'une intégration sur mesure par outil.", "changes": ["Les plateformes publicitaires exposent leurs données et actions aux agents, comme elles l'ont fait avec les API", "Vous pouvez interroger vos comptes en langage naturel, sans export ni tableur", "Le choix du modèle devient plus libre : le même connecteur sert plusieurs modèles", "La question clé devient « qui a quels droits ? » : lecture seule ou écriture ?"]}, "statusLabel": {"pret": "À confier aujourd'hui", "supervise": "Agent + validation humaine", "humain": "Reste humain"}, "tasks": [{"name": "Planning média", "status": "supervise", "agent": "Transforme un brief en plan média : leviers, répartition, calendrier, hypothèses de coût.", "human": "Arbitre le budget et le mix, valide les hypothèses.", "retail": "Plan retail media par enseigne à partir des objectifs de sell-out."}, {"name": "Set-up & nommage", "status": "supervise", "agent": "Génère la structure des campagnes et une nomenclature conforme à votre taxonomie ; contrôle le nommage existant.", "human": "Valide la structure avant création.", "retail": "Contrôle de nommage multi-enseignes pour un reporting consolidé."}, {"name": "Trafficking", "status": "supervise", "agent": "Crée placements, associe les créas, génère les tags (CM360), vérifie les URL et la cohérence.", "human": "Valide avant mise en ligne.", "retail": "Vérification des liens produits et des visuels par enseigne."}, {"name": "Flux produits & Merchant Center", "status": "pret", "agent": "Audite titres, attributs et images ; explique les rejets ; propose des réécritures.", "human": "Valide les réécritures appliquées au flux.", "retail": "Audit des fiches produits chez le retailer (contenu, images, avis)."}, {"name": "Performance Max", "status": "supervise", "agent": "Audite groupes d'assets, signaux d'audience, couverture du flux ; recommande des corrections.", "human": "Choisit les recommandations à appliquer.", "retail": "—"}, {"name": "Mots-clés & termes de recherche", "status": "pret", "agent": "Analyse des dizaines de milliers de termes, propose négatifs et nouvelles opportunités, chiffre le gaspillage.", "human": "Valide les listes avant application.", "retail": "Termes Sponsored Products, part de voix sur les mots-clés de catégorie."}, {"name": "Fatigue créative", "status": "pret", "agent": "Détecte l'usure de chaque créa (CTR, fréquence, ancienneté) et propose une rotation ou un brief.", "human": "Décide de la rotation et commande les nouvelles créas.", "retail": "Usure des bannières et vidéos on-site."}, {"name": "Reporting & insights", "status": "pret", "agent": "Répond en langage naturel, commente les variations, pré-rédige les bilans (QBR).", "human": "Vérifie les chiffres clés et porte la recommandation.", "retail": "Lecture croisée dépenses × ventes × disponibilité produit."}, {"name": "Disponibilité & buy box", "status": "pret", "agent": "Croise stocks, buy box et dépenses ; alerte quand on paie pour des produits en rupture.", "human": "Décide de couper ou réallouer.", "retail": "Spécifique retail media : Amazon, Criteo, régies enseignes."}, {"name": "Stratégie & négociation", "status": "humain", "agent": "Peut préparer des analyses et des scénarios.", "human": "Arbitrages entre leviers, négociation des JBP retailers, relation agence, décision d'arrêt.", "retail": "Négociation des plans d'affaires conjoints (JBP)."}], "limits": [["Chiffres inventés", "Un modèle peut « halluciner » un chiffre. Exigez que chaque chiffre vienne d'une requête traçable."], ["Contexte absent", "Promo, rupture, marge, stratégie de conquête : s'il n'est pas écrit, l'agent ne le sait pas."], ["Actions irréversibles", "Une dépense engagée ne se rembourse pas. Aucune écriture sans validation au début."], ["Données sales", "Nommage incohérent, conversions mal taguées : l'agent amplifie les erreurs."], ["Coûts cachés", "Chaque exécution consomme des tokens et des appels API. Un agent mal cadré coûte cher."]], "prereqs": [["Accès", "Comptes publicitaires, retailers, flux : qui donne l'accès, en lecture ou en écriture ?"], ["Qualité", "Conversions fiables, nommage cohérent, taxonomie documentée."], ["Historique", "Au moins 90 jours pour l'optimisation, 12 mois pour la saisonnalité."], ["Contexte écrit", "Brief, objectifs, marges, calendrier promo, règles de marque : ce que l'agent doit savoir."], ["Conformité", "RGPD, données clients, AI Act : quelles données sortent de vos systèmes et vers quel modèle ?"]], "autonomy": [["N0", "Informe", "Lit et explique. Aucune action.", "Reporting, audit, Q&R sur les comptes"], ["N1", "Recommande", "Propose des actions chiffrées. L'humain applique.", "Négatifs, rotation créa, corrections flux"], ["N2", "Prépare", "Prépare l'action dans la plateforme (brouillon). L'humain valide d'un clic.", "Set-up, trafficking, structure de campagne"], ["N3", "Agit sous contrôle", "Agit seul dans un périmètre et un budget définis, journalise, alerte.", "Ajustements d'enchères bornés, pauses sur rupture"]], "governance": ["Un owner métier par agent (pas « l'IA », une personne)", "Journal de chaque action : qui, quoi, quand, pourquoi", "Droits minimaux : lecture seule par défaut, écriture accordée par périmètre", "Réversibilité : toute action doit pouvoir être annulée", "Revue mensuelle : valeur produite, erreurs, coûts"], "costs": [["Coût par exécution", "Tokens du modèle + appels API. Demandez le coût par run et par mois."], ["Choix du modèle", "Un grand modèle pour raisonner, un petit pour les tâches répétitives."], ["Indépendance", "Vos briefs, règles et données doivent rester portables d'un modèle à l'autre."]], "incrementality": [["Baseline", "Mesurez la situation avant : temps passé, erreurs, performance."], ["Groupe témoin", "Agent sur une partie des comptes, campagnes ou marchés ; comparez au reste."], ["Deux KPI", "Efficacité (heures gagnées) ET efficience média (ROAS, CPA, gaspillage évité)."], ["Durée", "Au moins 4 à 6 semaines, saisonnalité comprise."]], "questions": ["Quelles actions l'agent peut-il faire seul, et lesquelles demandent une validation ?", "Chaque action est-elle journalisée et réversible ?", "D'où viennent les chiffres qu'il cite ? Puis-je voir la requête ?", "Quel modèle est utilisé, et peut-on en changer ?", "Où vont mes données ? Servent-elles à entraîner un modèle ?", "Quel est le coût par exécution et par mois ?", "Comment mesurez-vous l'incrémentalité, avec quel groupe témoin ?", "Que se passe-t-il quand l'agent ne sait pas ?", "Qui est responsable en cas d'erreur ?", "Puis-je récupérer mes briefs, règles et historiques si je change de prestataire ?"], "grid": [{"key": "valeur", "name": "Valeur", "q": "Combien de temps et d'argent en jeu ? (fréquence × durée × impact €)", "scale": ["Marginal", "Faible", "Moyen", "Fort", "Très fort, récurrent"]}, {"key": "donnees", "name": "Qualité des données", "q": "Les données nécessaires sont-elles accessibles, fiables, documentées ?", "scale": ["Inexistantes", "Éparses, manuelles", "Accessibles mais sales", "Fiables", "Fiables, connectées, historisées"]}, {"key": "risque", "name": "Risque en plateforme (inversé)", "q": "Que se passe-t-il si l'agent se trompe ? 5 = sans risque", "scale": ["Dépense irréversible", "Action live difficile à annuler", "Action live réversible", "Brouillon à valider", "Lecture seule"]}, {"key": "mesure", "name": "Mesurabilité", "q": "Peut-on prouver la valeur ? KPI clair, baseline, groupe témoin possible ?", "scale": ["Impossible", "Déclaratif", "KPI sans baseline", "KPI + baseline", "KPI + baseline + témoin"]}], "gridRules": [[16, 20, "Pilote agent", "Lancez un pilote de 6 semaines avec groupe témoin."], [11, 15, "Agent supervisé", "L'agent prépare, l'humain valide. Fiabilisez le critère le plus faible."], [0, 10, "Pas encore", "Gardez la tâche humaine ou une automatisation simple. Travaillez d'abord les données."]], "gridVeto": "Un critère à 1 = « pas encore », quel que soit le total.", "gridDet": "Si la tâche est 100 % prévisible (« si… alors… »), une règle ou un script suffit : pas besoin d'agent.", "brief": [["nom", "Nom de l'agent", "ex. Chasseur de négatifs Sponsored Products"], ["owner", "Owner métier", "La personne responsable de l'agent"], ["tache", "Tâche confiée", "Ce que l'agent fait, en une phrase"], ["declencheur", "Déclencheur", "Planifié (chaque lundi), événement (rupture), à la demande"], ["entrees", "Données & accès", "Comptes, flux, documents ; lecture ou écriture"], ["livrable", "Ce qu'il produit", "Liste, brouillon, alerte, rapport…"], ["interdits", "Ce qu'il n'a pas le droit de faire", "ex. activer, dépenser, supprimer"], ["validation", "Validation humaine", "Où, par qui, sous quel délai"], ["niveau", "Niveau d'autonomie", "N0 Informe · N1 Recommande · N2 Prépare · N3 Agit sous contrôle"], ["kpi", "KPI de succès & baseline", "ex. gaspillage −20 % vs 90 jours précédents"], ["arret", "Critère d'arrêt", "Quand on arrête le pilote"], ["cout", "Budget & coût max", "Par mois, modèle et API compris"]], "atelier": [["5 min", "Listez 3 tâches médias qui vous prennent le plus de temps chaque mois."], ["5 min", "Notez chacune sur la grille (4 critères, de 1 à 5)."], ["7 min", "Rédigez le brief d'agent de la tâche la mieux notée."], ["3 min", "2 ou 3 volontaires présentent leur brief, commenté en direct."]], "reflexes": [["Commencez en lecture seule", "Audit, reporting, recommandations : la valeur arrive avant le risque."], ["Écrivez le contexte", "Ce qui n'est pas écrit n'existe pas pour l'agent : brief, marges, promos, règles."], ["Gardez la main sur la dépense", "Aucune action qui engage du budget sans validation, au moins au début."], ["Exigez la traçabilité", "Chaque chiffre a une source, chaque action a un journal."], ["Mesurez contre un témoin", "Heures gagnées et performance, comparées à une baseline."]], "resources": [["Model Context Protocol", "modelcontextprotocol.io", "https://modelcontextprotocol.io"], ["Google Ads API", "developers.google.com/google-ads/api", "https://developers.google.com/google-ads/api/docs/start"], ["Amazon Ads API", "advertising.amazon.com/API", "https://advertising.amazon.com/API/docs/en-us"], ["AI Act (UE)", "Règlement européen sur l'IA", "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"]], "quizzes": [{"id": "q1", "after": 1, "title": "Quiz 1 · Agent, chatbot ou automatisation ?", "questions": [["Qu'est-ce qui distingue d'abord un agent IA d'un chatbot ?", ["Il utilise un modèle plus gros", "Il utilise des outils et enchaîne des actions vers un objectif", "Il répond plus vite", "Il fonctionne sans données"], 1, "Le chatbot répond. L'agent agit : il appelle des outils, observe le résultat et choisit l'étape suivante."], ["« Si le CPA dépasse 50 €, baisser l'enchère de 10 % » : c'est…", ["Un agent IA", "Un chatbot", "Une automatisation classique", "Un modèle de langage"], 2, "Règle fixe, sans raisonnement : une automatisation. Utile, mais elle ne gère pas l'imprévu."], ["À quoi sert MCP (Model Context Protocol) ?", ["À entraîner un modèle sur vos données", "À brancher un modèle sur des outils et des données via un standard commun", "À mesurer l'incrémentalité", "À remplacer les API des plateformes"], 1, "MCP est une prise standard entre un modèle et des outils. Il s'appuie sur les API, il ne les remplace pas."], ["Lequel n'est PAS un composant d'un agent ?", ["Le modèle", "Les outils", "La boucle de décision", "Un tableau de bord BI"], 3, "Modèle, outils, données, boucle de décision et garde-fous. Le tableau de bord est un livrable possible, pas un composant."]]}, {"id": "q2", "after": 2, "title": "Quiz 2 · Quelles tâches confier ?", "questions": [["Quelle tâche confier en premier à un agent ?", ["Fixer le budget média annuel", "Analyser les termes de recherche et proposer des négatifs", "Négocier le plan d'affaires conjoint avec un retailer", "Choisir l'agence"], 1, "Gros volume, lecture seule, règles claires, gain mesurable : le cas idéal pour démarrer."], ["Un agent détecte la fatigue d'une créa. Qui décide de la rotation ?", ["L'agent, seul", "L'humain, sur recommandation de l'agent", "La plateforme publicitaire", "Personne"], 1, "La détection est automatisable. La décision créative et la commande de nouvelles créas restent humaines."], ["Pourquoi l'audit de flux produits est-il un bon cas d'usage ?", ["Volume élevé, règles claires, erreurs coûteuses, audit en lecture seule", "Il n'a pas besoin de données", "Il remplace Merchant Center", "Il n'y a jamais d'erreur dans un flux"], 0, "Des milliers de produits, des règles connues, un impact direct sur la diffusion : le travail rêvé pour un agent."], ["Quelle est la limite la plus fréquente d'un agent média ?", ["Il est trop lent", "Il ignore le contexte business non écrit (promos, marges, stocks)", "Il ne sait pas lire un CSV", "Il ne parle pas français"], 1, "S'il n'est pas écrit et fourni, l'agent ne le sait pas. D'où l'importance du brief."]]}, {"id": "q3", "after": 3, "title": "Quiz 3 · Garder la main", "questions": [["Quand la validation humaine est-elle indispensable ?", ["Jamais, c'est le but de l'agent", "Avant toute action qui engage de la dépense ou est difficile à annuler", "Seulement pour le reporting", "Uniquement le premier jour"], 1, "La lecture peut être autonome. L'écriture qui engage du budget passe par une validation, au moins au début."], ["Comment prouver la valeur d'un agent ?", ["Demander à l'éditeur", "Compter le nombre de requêtes", "Comparer à une baseline ou un groupe témoin", "Regarder le CTR la première semaine"], 2, "Incrémentalité : ce qui se serait passé sans l'agent. Sans témoin, pas de preuve."], ["Quelle question poser en priorité à un prestataire ?", ["Quel est le nom du modèle ?", "Les actions de l'agent sont-elles journalisées et réversibles ?", "L'interface est-elle en mode sombre ?", "Combien d'agents avez-vous ?"], 1, "Journal et réversibilité : sans eux, impossible d'auditer ou de corriger."], ["Pourquoi viser l'indépendance vis-à-vis du modèle ?", ["Pour la mode", "Les modèles évoluent vite en prix et qualité : vos briefs et données doivent rester portables", "Parce qu'un seul modèle suffit toujours", "Pour éviter MCP"], 1, "Le meilleur modèle d'aujourd'hui ne sera pas celui de demain. Ne vous enfermez pas."]]}]};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem('agia:'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('agia:'+k, JSON.stringify(v)); }catch(e){} }
+};
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
+async function copy(text){ try{ await navigator.clipboard.writeText(text); toast('Copié'); }catch(e){ toast('Copie impossible : sélectionnez le texte'); } }
+
+// hero + programme
+$('#host').textContent = D.meta.host;
+$('#when').textContent = D.meta.date + ' · ' + D.meta.time;
+$('#who').innerHTML = '<b>' + esc(D.meta.speaker) + '</b> · ' + esc(D.meta.speaker_role);
+$('#prog').innerHTML = D.programme.map(([t,d,n,s]) => `<div class="card"><div class="num">${t}</div><span class="d">${d}</span><b>${esc(n)}</b><p>${esc(s)}</p></div>`).join('');
+$('#obj').innerHTML = D.objectifs.map(o => `<li>${esc(o)}</li>`).join('');
+
+// 01
+$('#compare').innerHTML = '<tr><th></th>' + D.compare.cols.map(c=>`<th>${c}</th>`).join('') + '</tr>' +
+  D.compare.rows.map(r => '<tr>' + r.map(c=>`<td>${esc(c)}</td>`).join('') + '</tr>').join('');
+$('#anatomy').innerHTML = D.anatomy.map(([n,d],i) => `<div class="card ${i===4?'hl':''}"><div class="num">0${i+1}</div><h4>${n}</h4><p>${esc(d)}</p></div>`).join('');
+$('#loop').innerHTML = D.loop.map(s=>`<span class="pill">${s}</span>`).join('<i>→</i>') + '<i>↺</i>';
+$('#mcpWhat').textContent = D.mcp.what;
+$('#mcpChanges').innerHTML = D.mcp.changes.map(c=>`<div class="card"><p style="color:var(--txt)">${esc(c)}</p></div>`).join('');
+
+// 02 tasks
+const filt = [['all','Toutes']].concat(Object.entries(D.statusLabel));
+let cur = 'all';
+function renderTasks(){
+  $('#filters').innerHTML = filt.map(([k,l]) => `<button data-f="${k}" class="${k===cur?'on':''}">${l}</button>`).join('');
+  $('#tasks').innerHTML = D.tasks.filter(t => cur==='all' || t.status===cur).map(t => `
+    <div class="card task"><span class="tag s-${t.status}">${D.statusLabel[t.status]}</span><h4>${esc(t.name)}</h4>
+    <dl><dt>L'agent</dt><dd>${esc(t.agent)}</dd><dt>L'humain</dt><dd>${esc(t.human)}</dd>
+    ${t.retail && t.retail!=='—' ? `<dt>En retail media</dt><dd>${esc(t.retail)}</dd>`:''}</dl></div>`).join('');
+}
+$('#filters').addEventListener('click', e => { const f=e.target.dataset.f; if(f){ cur=f; renderTasks(); } });
+renderTasks();
+$('#limits').innerHTML = D.limits.map(([h,b]) => `<div class="card"><h4>${h}</h4><p>${esc(b)}</p></div>`).join('');
+
+// 03
+$('#prereqs').innerHTML = D.prereqs.map(([h,b]) => `<div class="card"><h4>${h}</h4><p>${esc(b)}</p></div>`).join('');
+const autoCol = ['var(--yel)','var(--yel)','var(--gold)','var(--mut)'];
+$('#autonomy').innerHTML = D.autonomy.map(([lv,n,w,ex],i) => `<div class="auto"><div class="lv" style="background:${autoCol[i]}">${lv}</div><div class="bd"><b>${n}</b><p>${esc(w)}</p><small>${esc(ex)}</small></div></div>`).join('');
+$('#gov').innerHTML = D.governance.map(g => `<div class="card"><p style="color:var(--txt)">${esc(g)}</p></div>`).join('');
+$('#costs').innerHTML = D.costs.map(([h,b]) => `<div class="card"><h4>${h}</h4><p>${esc(b)}</p></div>`).join('');
+$('#incr').innerHTML = D.incrementality.map(([h,b]) => `<div class="card"><h4>${h}</h4><p>${esc(b)}</p></div>`).join('');
+const qChecked = store.get('questions', []);
+$('#questions').innerHTML = D.questions.map((q,i) => `<li><label><input type="checkbox" data-i="${i}" ${qChecked.includes(i)?'checked':''}><span>${String(i+1).padStart(2,'0')} · ${esc(q)}</span></label></li>`).join('');
+$('#questions').addEventListener('change', () => store.set('questions', [...document.querySelectorAll('#questions input:checked')].map(x=>+x.dataset.i)));
+$('#copyQ').onclick = () => copy(D.questions.map((q,i)=>`${i+1}. ${q}`).join('\n'));
+
+// quizzes
+D.quizzes.forEach((qz, qi) => {
+  const host = $('#quiz-' + qz.after);
+  const saved = store.get(qz.id, {});
+  host.innerHTML = `<div class="quiz"><p class="eyebrow">Quiz ${qi+1}</p><h3>${esc(qz.title.split('·')[1]||qz.title)}</h3>
+    ${qz.questions.map(([q,opts,ans,ex],i) => `<div class="q" data-q="${i}"><b>${i+1}. ${esc(q)}</b>
+      <div class="opts">${opts.map((o,j)=>`<button data-j="${j}">${'ABCD'[j]}. ${esc(o)}</button>`).join('')}</div>
+      <p class="expl">${esc(ex)}</p></div>`).join('')}
+    <p class="score"></p><button class="btn ghost" data-reset>Recommencer</button></div>`;
+  const box = host.firstElementChild;
+  function answer(i, j, save=true){
+    const qEl = box.querySelector(`[data-q="${i}"]`), ans = qz.questions[i][2];
+    qEl.querySelectorAll('button').forEach((b,k) => { b.disabled = true; if(k===ans) b.classList.add('ok'); else if(k===j) b.classList.add('ko'); });
+    qEl.querySelector('.expl').classList.add('show');
+    if(save){ saved[i]=j; store.set(qz.id, saved); }
+    const n = Object.keys(saved).length, good = Object.entries(saved).filter(([k,v]) => qz.questions[k][2]===v).length;
+    box.querySelector('.score').textContent = n===qz.questions.length ? `Score : ${good} / ${n}` + (good===n?' · parfait':'') : '';
+  }
+  box.addEventListener('click', e => {
+    if(e.target.dataset.reset!==undefined){ store.set(qz.id,{}); for(const k in saved) delete saved[k];
+      box.querySelectorAll('.opts button').forEach(b=>{b.disabled=false;b.classList.remove('ok','ko');});
+      box.querySelectorAll('.expl').forEach(x=>x.classList.remove('show')); box.querySelector('.score').textContent=''; return; }
+    const b = e.target.closest('.opts button'); if(!b || b.disabled) return;
+    answer(+b.closest('.q').dataset.q, +b.dataset.j);
+  });
+  Object.entries(saved).forEach(([i,j]) => answer(+i, j, false));
+});
+
+// atelier
+$('#steps').innerHTML = D.atelier.map(([t,d],i) => `<div class="card ${i===2?'hl':''}"><div class="num">${t}</div><p style="color:var(--txt)">${esc(d)}</p></div>`).join('');
+$('#veto').textContent = D.gridVeto + ' ' + D.gridDet;
+let tasks = store.get('tasks', [0,1,2].map(()=>({name:'', s:{}})));
+function verdict(t){
+  const vals = D.grid.map(g => t.s[g.key]).filter(Boolean);
+  if(vals.length < D.grid.length) return null;
+  const tot = vals.reduce((a,b)=>a+b,0);
+  if(vals.includes(1)) return {tot, name:'Pas encore', act:'Un critère à 1 bloque. Travaillez-le d\'abord.', col:'var(--mut)'};
+  const r = D.gridRules.find(([lo,hi]) => tot>=lo && tot<=hi);
+  return {tot, name:r[2], act:r[3], col: r[2]==='Pilote agent'?'var(--yel)':(r[2]==='Agent supervisé'?'var(--gold)':'var(--mut)')};
+}
+function renderScorer(){
+  $('#scorer').innerHTML = tasks.map((t,ti) => `<div class="taskrow" data-t="${ti}">
+    <input type="text" placeholder="Tâche ${ti+1} : ex. ${['analyser les termes de recherche Sponsored Products','contrôler le nommage des campagnes','rédiger le bilan mensuel retail media'][ti]}" value="${esc(t.name)}" aria-label="Tâche ${ti+1}">
+    ${D.grid.map(g => `<div class="crit"><div class="nm">${g.name}<small>${esc(g.q)}</small></div>
+      <div class="dots" data-k="${g.key}">${[1,2,3,4,5].map(v=>`<button type="button" data-v="${v}" class="${t.s[g.key]===v?'on':''}" title="${esc(g.scale[v-1])}">${v}</button>`).join('')}
+      <span class="lab">${t.s[g.key] ? esc(g.scale[t.s[g.key]-1]) : ''}</span></div></div>`).join('')}
+    <div class="verdict">${(v => v ? `<span class="tot">${v.tot}/20</span><span class="pill" style="background:${v.col}">${v.name}</span><span class="vd"><small>${esc(v.act)}</small></span>` : '<span class="vd"><small>Notez les 4 critères pour obtenir la recommandation.</small></span>')(verdict(t))}</div>
+  </div>`).join('');
+}
+$('#scorer').addEventListener('click', e => {
+  const b = e.target.closest('.dots button'); if(!b) return;
+  const ti = +b.closest('.taskrow').dataset.t, k = b.closest('.dots').dataset.k;
+  tasks[ti].s[k] = +b.dataset.v; store.set('tasks', tasks); renderScorer(); prefill();
+});
+$('#scorer').addEventListener('input', e => {
+  if(e.target.type!=='text') return;
+  tasks[+e.target.closest('.taskrow').dataset.t].name = e.target.value; store.set('tasks', tasks); prefill();
+});
+renderScorer();
+
+let brief = store.get('brief', {});
+$('#brief').innerHTML = D.brief.map(([k,l,h]) => `<label>${l}<textarea data-k="${k}" placeholder="${esc(h)}" rows="2">${esc(brief[k]||'')}</textarea></label>`).join('');
+$('#brief').addEventListener('input', e => { brief[e.target.dataset.k] = e.target.value; store.set('brief', brief); });
+function best(){
+  const scored = tasks.map(t => ({t, v: verdict(t)})).filter(x => x.v && x.t.name);
+  scored.sort((a,b) => b.v.tot - a.v.tot); return scored[0];
+}
+function prefill(){
+  const b = best(); if(!b) return;
+  const ta = $('#brief textarea[data-k="tache"]');
+  if(!brief._touched_tache && (!brief.tache || brief.tache === brief._auto)){ ta.value = b.t.name; brief.tache = b.t.name; brief._auto = b.t.name; store.set('brief', brief); }
+}
+function briefMd(){
+  const b = best();
+  const lines = ['# Brief d\'agent' + (brief.nom ? ' · ' + brief.nom : ''), ''];
+  if(b) lines.push(`Score grille : ${b.v.tot}/20 (${D.grid.map(g=>g.name.split(' (')[0]+' '+b.t.s[g.key]).join(', ')}) → ${b.v.name}`, '');
+  D.brief.forEach(([k,l]) => { lines.push('## ' + l, (brief[k]||'—').trim(), ''); });
+  lines.push('---', 'Formation « Agents IA × retail media & performance » · ' + D.meta.host + ' · ' + D.meta.date);
+  return lines.join('\n');
+}
+$('#copyBrief').onclick = () => copy(briefMd());
+$('#dlBrief').onclick = () => { const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([briefMd()],{type:'text/markdown'})); a.download='brief-agent.md'; a.click(); };
+$('#printBrief').onclick = () => window.print();
+$('#resetBrief').onclick = () => { if(!confirm('Effacer la grille et le brief ?')) return; tasks=[0,1,2].map(()=>({name:'',s:{}})); brief={}; store.set('tasks',tasks); store.set('brief',brief); renderScorer(); document.querySelectorAll('#brief textarea').forEach(t=>t.value=''); };
+prefill();
+
+// synthèse
+$('#reflexes').innerHTML = D.reflexes.map(([h,b],i) => `<div class="reflex"><div class="n">${i+1}</div><div><b>${h}</b><p>${esc(b)}</p></div></div>`).join('');
+$('#res').innerHTML = D.resources.map(([n,d,u]) => `<a class="card" href="${u}" target="_blank" rel="noopener" style="text-decoration:none"><h4>${n}</h4><p>${d}</p></a>`).join('');
+$('#foot').innerHTML = `Support de la formation « Agents IA : les mettre au travail sur vos campagnes retail media et médias à la performance » · ${esc(D.meta.host)} · ${esc(D.meta.date)}.<br>Intervenant : ${esc(D.meta.speaker)}, ${esc(D.meta.speaker_role)}. Vos réponses restent dans votre navigateur ; rien n'est envoyé.`;
+
+// nav highlight
+const links = [...document.querySelectorAll('nav a[href^="#"]:not(.brand)')];
+const io = new IntersectionObserver(es => es.forEach(en => { if(en.isIntersecting){ links.forEach(l => l.classList.toggle('on', l.getAttribute('href')==='#'+en.target.id)); } }), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('section[id]').forEach(s => io.observe(s));
+</script>
+</body>
+</html>
