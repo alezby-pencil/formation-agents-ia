@@ -84,6 +84,55 @@ td:last-child{color:var(--txt);font-weight:600}
 .trace .who{font-size:12px;font-weight:700;text-transform:uppercase;text-align:center;padding:6px 0;border-radius:999px;color:#000}
 .trace .who.Vous{background:var(--gold)}.trace .who.Modèle{background:var(--yel)}.trace .who.Harness{border:1px solid var(--yel);color:var(--txt)}
 .trace .c{color:var(--gold);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+/* live quiz */
+.join{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:28px}
+.join input{font:700 16px var(--body);letter-spacing:.12em;text-transform:uppercase;background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:999px;padding:11px 18px;width:190px}
+.join small{color:var(--mut);width:100%}
+#livebar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--bg2);border-top:1px solid var(--gold);padding:10px 16px;gap:10px;align-items:center;font-size:14px}
+#livebar.show{display:flex}
+#livebar span:nth-child(2){flex:1}
+#livebar button{font:600 13px var(--body);background:none;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:5px 12px;cursor:pointer}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--mut);flex-shrink:0}
+.dot.on{background:var(--ok);box-shadow:0 0 0 4px rgba(55,170,87,.25)}
+body.haslive{padding-bottom:52px}
+body.ovopen{overflow:hidden}
+#liveov{display:none;position:fixed;inset:0;z-index:60;background:rgba(13,13,13,.98);overflow-y:auto;padding:28px 16px 40px}
+#liveov.show{display:block}
+.ovin{max-width:860px;margin:0 auto}
+.ovin h2{font-size:clamp(30px,5vw,48px);margin-bottom:16px}
+.ovtimer{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.big{font-family:var(--disp);font-weight:900;font-size:64px;line-height:1;color:var(--yel)}
+.ovtimer small,.ovsum small{color:var(--mut);font-size:14px}
+.ovbar{width:100%;height:8px;background:var(--card);border-radius:999px;overflow:hidden}
+.ovbar i{display:block;height:100%;background:var(--gold);transition:width .25s linear}
+.ovsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:8px}
+.ovsum>div{background:var(--card);border-radius:14px;padding:16px}
+.ovsum small{display:block;margin-top:4px}
+.ovq{margin-top:22px}
+.ovq>b{font-size:18px;display:inline-block;margin-bottom:10px}
+.ovq .cnt{margin-left:10px;color:var(--gold);font-weight:700;font-size:13px}
+#liveov .opts button.sel{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
+.ovres{position:relative;display:flex;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:15px;overflow:hidden}
+.ovres i{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.09)}
+.ovres span,.ovres em{position:relative;font-style:normal}
+.ovres em{font-weight:700;white-space:nowrap}
+.ovres.ok{border-color:var(--ok)} .ovres.ok i{background:rgba(55,170,87,.35)}
+.ovres.ko{border-color:var(--ko)}
+.ovfoot{margin-top:26px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.ovnote{color:var(--mut);font-size:14px}
+#hostpanel{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--bg2);border-top:2px solid var(--yel);padding:12px 16px;max-height:46vh;overflow-y:auto;font-size:14px}
+#hostpanel.show{display:block}
+body.hashost{padding-bottom:230px}
+#hostpanel .hl{color:var(--yel);font-size:16px;margin-right:10px}
+#hostpanel .code{font-family:var(--disp);font-size:26px;letter-spacing:.08em}
+.hrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.hrow input,.hrow select{font:14px var(--body);background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+.hrow input{flex:1;min-width:200px}
+.hrow .stat b{font-family:var(--disp);font-size:22px;color:var(--yel);margin-right:4px}
+.hrow .btn{padding:9px 16px}
+.hqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 16px;color:var(--mut)}
+.hqs input{accent-color:var(--gold);margin-right:6px}
+
 /* filters */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
 .filters button{font:600 14px var(--body);border:1px solid var(--line);background:transparent;color:var(--txt);padding:8px 14px;border-radius:999px;cursor:pointer}
@@ -178,6 +227,8 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:14px}
   <p class="sub">sur vos campagnes retail media et médias à la performance</p>
   <span class="pill" id="when"></span>
   <p class="who" id="who"></p>
+  <div class="join" id="joinbox"><input id="joincode" placeholder="Code session" maxlength="8" aria-label="Code de session"><button class="btn" id="joinbtn">Rejoindre le quiz en direct</button>
+  <small>Le formateur donne le code pendant la session. Les réponses sont anonymes.</small></div>
 </div></header>
 
 <section id="programme"><div class="wrap">
@@ -287,6 +338,10 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:14px}
 </div></section>
 
 <footer><div class="wrap" id="foot"></div></footer>
+<div id="livebar" role="status"></div>
+<div id="hostpanel"></div>
+<div id="liveov" role="dialog" aria-modal="true" aria-label="Quiz en direct"></div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -438,7 +493,236 @@ prefill();
 // synthèse
 $('#reflexes').innerHTML = D.reflexes.map(([h,b],i) => `<div class="reflex"><div class="n">${i+1}</div><div><b>${h}</b><p>${esc(b)}</p></div></div>`).join('');
 $('#res').innerHTML = D.resources.map(([n,d,u]) => `<a class="card" href="${u}" target="_blank" rel="noopener" style="text-decoration:none"><h4>${n}</h4><p>${d}</p></a>`).join('');
-$('#foot').innerHTML = `Support de la formation « Agents IA : les mettre au travail sur vos campagnes retail media et médias à la performance » · ${esc(D.meta.host)} · ${esc(D.meta.date)}.<br>Intervenant : ${esc(D.meta.speaker)}, ${esc(D.meta.speaker_role)}. Vos réponses restent dans votre navigateur ; rien n'est envoyé.`;
+$('#foot').innerHTML = `Support de la formation « Agents IA : les mettre au travail sur vos campagnes retail media et médias à la performance » · ${esc(D.meta.host)} · ${esc(D.meta.date)}.<br>Intervenant : ${esc(D.meta.speaker)}, ${esc(D.meta.speaker_role)}. Hors quiz en direct, vos réponses restent dans votre navigateur. En quiz en direct, seules vos réponses anonymes sont transmises au formateur (relais ntfy.sh).`;
+
+// ================= QUIZ LIVE (multi-participants) =================
+// Relais temps réel : ntfy (pub/sub HTTP + SSE, sans compte). Seules des réponses anonymes y transitent.
+// Deux canaux par session : "-c" (contrôle, publié par l'animateur) et "-a" (réponses des participants).
+const RELAY = 'https://ntfy.sh';
+const qp = new URLSearchParams(location.search);
+const IS_HOST = qp.has('animateur');
+const pid = store.get('pid', null) || (() => { const v = Math.random().toString(36).slice(2, 10); store.set('pid', v); return v; })();
+let srvOffset = 0;
+const srvNow = () => Date.now() + srvOffset;
+const topic = (code, k) => 'agia-udm-' + code.toLowerCase() + '-' + k;
+const rnd = (n, abc) => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => abc[b % abc.length]).join('');
+
+async function pub(code, k, obj){
+  const r = await fetch(`${RELAY}/${topic(code, k)}`, {method: 'POST', body: JSON.stringify(obj)});
+  if(!r.ok) throw new Error('relay ' + r.status);
+  return r.json();
+}
+function sub(code, k, onMsg, onState){
+  const seen = new Set();
+  const es = new EventSource(`${RELAY}/${topic(code, k)}/sse?since=all`);
+  es.addEventListener('open', e => {
+    try{ const d = JSON.parse(e.data); if(d && d.time) srvOffset = d.time * 1000 + 500 - Date.now(); }catch(_){}
+    onState && onState(true);
+  });
+  es.onmessage = e => {
+    try{
+      const d = JSON.parse(e.data);
+      if(d.event !== 'message' || seen.has(d.id)) return;
+      seen.add(d.id);
+      onMsg(JSON.parse(d.message), d);
+    }catch(_){}
+  };
+  es.onerror = () => onState && onState(false);
+  return es;
+}
+
+// ---------- overlay commun (réponse + résultats)
+const ov = $('#liveov');
+let ovState = null;          // {round, mine, res, host}
+let tally = {};              // animateur : roundId -> {pid: {q: a}}
+let people = new Set();      // animateur : participants connus
+let tickId = null;
+const roundEnd = r => r.at + r.dur * 1000;
+const secsLeft = r => Math.max(0, Math.ceil((roundEnd(r) - srvNow()) / 1000));
+
+function renderOv(){
+  const st = ovState;
+  if(!st){ ov.classList.remove('show'); document.body.classList.remove('ovopen'); clearInterval(tickId); tickId = null; return; }
+  const r = st.round, qz = D.quizzes[r.quiz], res = st.res, left = secsLeft(r), over = !!res || left <= 0;
+  st.locked = over;
+  const t = st.host ? (tally[r.id] || {}) : null;
+  let head;
+  if(res){
+    const mineGood = r.qs.filter(q => st.mine && st.mine[q] === qz.questions[q][2]).length;
+    head = `<div class="ovsum"><div><span class="big">${res.pct} %</span><small>de bonnes réponses · score global</small></div>
+      <div><span class="big">${res.n}</span><small>participant${res.n > 1 ? 's' : ''} · ${res.total} réponse${res.total > 1 ? 's' : ''}</small></div>
+      ${st.host ? `<div><span class="big">${res.sess.pct} %</span><small>score de la session (${res.sess.total} réponses)</small></div>`
+                : `<div><span class="big">${mineGood}/${r.qs.length}</span><small>votre score</small></div>`}</div>`;
+  } else {
+    head = `<div class="ovtimer"><span class="big" id="ovleft">${left}</span><small>secondes</small>
+      <div class="ovbar"><i id="ovprog" style="width:${Math.min(100, left / r.dur * 100)}%"></i></div></div>`;
+  }
+  const body = r.qs.map((q, n) => {
+    const [text, opts, ans, expl] = qz.questions[q];
+    const counts = res ? (res.counts[q] || opts.map(() => 0)) : null;
+    const tot = counts ? counts.reduce((a, b) => a + b, 0) : 0;
+    const answered = t ? Object.values(t).filter(a => q in a).length : 0;
+    return `<div class="ovq"><b>${n + 1}. ${esc(text)}</b>${t && !res ? `<span class="cnt">${answered} réponse${answered > 1 ? 's' : ''}</span>` : ''}
+      <div class="opts">${opts.map((o, j) => {
+        const mine = st.mine && st.mine[q] === j;
+        if(res){
+          const c = counts[j] || 0, p = tot ? Math.round(c / tot * 100) : 0;
+          return `<div class="ovres ${j === ans ? 'ok' : ''} ${mine && j !== ans ? 'ko' : ''}"><i style="width:${p}%"></i><span>${'ABCD'[j]}. ${esc(o)}${mine ? ' · votre réponse' : ''}</span><em>${c} · ${p} %</em></div>`;
+        }
+        return `<button data-q="${q}" data-j="${j}" class="${mine ? 'sel' : ''}" ${over || st.host ? 'disabled' : ''}>${'ABCD'[j]}. ${esc(o)}</button>`;
+      }).join('')}</div>${res ? `<p class="expl show">${esc(expl)}</p>` : ''}</div>`;
+  }).join('');
+  let foot;
+  if(st.host) foot = res ? `<button class="btn" data-ov="close">Fermer</button>` : `<button class="btn" data-ov="reveal">Révéler maintenant</button><span class="ovnote">${people.size} participant${people.size > 1 ? 's' : ''} connecté${people.size > 1 ? 's' : ''}</span>`;
+  else if(res) foot = `<button class="btn" data-ov="close">Fermer</button>`;
+  else if(over) foot = `<span class="ovnote">Temps écoulé. Résultats dans un instant…</span>`;
+  else foot = `<span class="ovnote" id="ovnote">${Object.keys(st.mine || {}).length ? 'Réponse enregistrée. Vous pouvez la changer jusqu\'à la fin du temps.' : 'Choisissez une réponse par question.'}</span>`;
+  ov.innerHTML = `<div class="ovin"><p class="eyebrow">En direct · ${esc(qz.title.split('·')[0].trim())}</p><h2>${esc((qz.title.split('·')[1] || qz.title).trim())}</h2>${head}${body}<div class="ovfoot">${foot}</div></div>`;
+  ov.classList.add('show'); document.body.classList.add('ovopen');
+  if(!tickId) tickId = setInterval(tick, 250);
+}
+function tick(){
+  const st = ovState; if(!st || st.res) return;
+  const left = secsLeft(st.round), el = $('#ovleft'), pr = $('#ovprog');
+  if(el) el.textContent = left;
+  if(pr) pr.style.width = Math.min(100, (roundEnd(st.round) - srvNow()) / (st.round.dur * 1000) * 100) + '%';
+  if(left <= 0 && !st.locked) renderOv();
+  if(st.host && srvNow() > roundEnd(st.round) + 2000 && !st.revealing) reveal();
+}
+ov.addEventListener('click', async e => {
+  const st = ovState; if(!st) return;
+  const act = e.target.dataset.ov;
+  if(act === 'close'){ if(!st.host) store.set('dismissed', st.round.id); ovState = null; renderOv(); if(st.host) renderHost(); return; }
+  if(act === 'reveal'){ reveal(); return; }
+  const b = e.target.closest('.opts button'); if(!b || b.disabled || st.host) return;
+  const q = +b.dataset.q, j = +b.dataset.j;
+  st.mine[q] = j; store.set('ans:' + st.round.id, st.mine);
+  b.parentElement.querySelectorAll('button').forEach(x => x.classList.toggle('sel', x === b));
+  const note = $('#ovnote');
+  try{ await pub(live.code, 'a', {t: 'ans', r: st.round.id, p: pid, q, a: j}); if(note) note.textContent = 'Réponse enregistrée. Vous pouvez la changer jusqu\'à la fin du temps.'; }
+  catch(_){ if(note) note.textContent = 'Réponse non envoyée : vérifiez votre connexion et cliquez à nouveau.'; }
+});
+
+// ---------- participant
+let live = store.get('live', null);
+const bar = $('#livebar');
+function setBar(text, ok){ bar.innerHTML = `<span class="dot ${ok ? 'on' : ''}"></span><span>${text}</span><button id="liveQuit">Quitter</button>`; bar.classList.add('show'); document.body.classList.add('haslive'); }
+bar.addEventListener('click', e => { if(e.target.id === 'liveQuit'){ store.set('live', null); location.href = location.pathname; } });
+function startParticipant(){
+  $('#joinbox').style.display = 'none';
+  let cur = null, results = {}, ended = false, connected = false, timer = null;
+  const label = () => ended ? `Session ${live.code} terminée. Merci !` : connected ? `Session ${live.code} · en direct. Les questions s'afficheront ici au lancement.` : `Session ${live.code} · connexion…`;
+  const decide = () => {
+    setBar(label(), connected && !ended);
+    if(!cur) return;
+    const res = results[cur.id];
+    if(res){ if(store.get('dismissed', '') === cur.id) return; }
+    else if(ended || srvNow() > roundEnd(cur) + 20000) { if(ovState && !ovState.res){ ovState = null; renderOv(); } return; }
+    ovState = {round: cur, mine: store.get('ans:' + cur.id, {}), res: res || null};
+    renderOv();
+  };
+  const schedule = () => { clearTimeout(timer); timer = setTimeout(decide, 150); };
+  setBar(label(), false);
+  sub(live.code, 'c', (m, meta) => {
+    if(m.t === 'round') cur = {...m, at: meta.time * 1000};
+    else if(m.t === 'res') results[m.r] = m;
+    else if(m.t === 'end') ended = true;
+    schedule();
+  }, ok => { connected = ok; schedule(); });
+  pub(live.code, 'a', {t: 'hi', p: pid}).catch(() => {});
+}
+function joinLive(raw){
+  const code = (raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if(code.length < 4){ toast('Code de session invalide'); return; }
+  live = {code}; store.set('live', live); startParticipant();
+}
+$('#joinbtn').onclick = () => joinLive($('#joincode').value);
+$('#joincode').addEventListener('keydown', e => { if(e.key === 'Enter') joinLive(e.target.value); });
+
+// ---------- animateur
+let host = store.get('host', null);   // {code, rounds: [{id, quiz, qs, dur, at, res}]}
+const hp = $('#hostpanel');
+const saveHost = () => store.set('host', host);
+function sessionScore(){
+  const done = (host ? host.rounds : []).filter(r => r.res);
+  const good = done.reduce((a, r) => a + r.res.good, 0), total = done.reduce((a, r) => a + r.res.total, 0);
+  return {good, total, pct: total ? Math.round(good / total * 100) : 0};
+}
+function renderHost(){
+  if(!IS_HOST) return;
+  hp.classList.add('show'); document.body.classList.add('hashost');
+  if(!host){ hp.innerHTML = `<b class="hl">Mode animateur</b><span>Créez une session, partagez le lien, puis lancez les questions.</span><button class="btn" data-h="create">Créer une session</button>`; return; }
+  const link = location.origin + location.pathname + '?s=' + host.code;
+  const sel = store.get('hostsel', {quiz: 0, dur: 60});
+  const qz = D.quizzes[sel.quiz], ss = sessionScore();
+  hp.innerHTML = `<div class="hrow"><b class="hl">Session <span class="code">${host.code}</span></b>
+      <input readonly value="${esc(link)}" id="hlink" aria-label="Lien participant"><button class="btn ghost" data-h="copy">Copier le lien</button>
+      <span class="stat"><b>${people.size}</b> participant${people.size > 1 ? 's' : ''}</span>
+      <span class="stat"><b>${ss.total ? ss.pct + ' %' : '–'}</b> score global${ss.total ? ` (${ss.total} rép.)` : ''}</span>
+      <button class="btn ghost" data-h="end">Terminer</button></div>
+    <div class="hrow"><select id="hquiz" aria-label="Quiz">${D.quizzes.map((q, i) => `<option value="${i}" ${i === sel.quiz ? 'selected' : ''}>${esc(q.title)}</option>`).join('')}</select>
+      <select id="hdur" aria-label="Durée">${[20, 30, 45, 60, 90, 120, 180].map(d => `<option value="${d}" ${d === sel.dur ? 'selected' : ''}>${d} s</option>`).join('')}</select>
+      <button class="btn" data-h="go">Lancer le compte à rebours</button></div>
+    <div class="hqs">${qz.questions.map((q, i) => `<label><input type="checkbox" value="${i}" checked> ${i + 1}. ${esc(q[0])}</label>`).join('')}</div>`;
+}
+async function reveal(){
+  const st = ovState; if(!st || !st.host || st.res || st.revealing) return;
+  st.revealing = true;
+  const r = st.round, qz = D.quizzes[r.quiz], t = tally[r.id] || {}, counts = {};
+  let good = 0, total = 0;
+  r.qs.forEach(q => { counts[q] = qz.questions[q][1].map(() => 0); });
+  Object.values(t).forEach(a => r.qs.forEach(q => { if(q in a && counts[q][a[q]] !== undefined){ counts[q][a[q]]++; total++; if(a[q] === qz.questions[q][2]) good++; } }));
+  const rec = host.rounds.find(x => x.id === r.id);
+  const res = {t: 'res', r: r.id, counts, n: Object.keys(t).length, good, total, pct: total ? Math.round(good / total * 100) : 0};
+  rec.res = {good, total};
+  res.sess = sessionScore();
+  saveHost();
+  try{ await pub(host.code, 'c', res); }catch(_){ toast('Résultats non diffusés : connexion ?'); }
+  st.res = res; renderOv();
+}
+hp.addEventListener('change', e => {
+  if(e.target.id === 'hquiz' || e.target.id === 'hdur'){ store.set('hostsel', {quiz: +$('#hquiz').value, dur: +$('#hdur').value}); if(e.target.id === 'hquiz') renderHost(); }
+});
+hp.addEventListener('click', async e => {
+  const a = e.target.dataset.h; if(!a) return;
+  if(a === 'create'){ host = {code: rnd(6, 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'), rounds: []}; saveHost(); startHost(); }
+  else if(a === 'copy'){ copy($('#hlink').value); }
+  else if(a === 'end'){
+    if(!confirm('Terminer la session pour tous les participants ?')) return;
+    try{ await pub(host.code, 'c', {t: 'end'}); }catch(_){}
+    host = null; saveHost(); tally = {}; people = new Set(); renderHost();
+  }
+  else if(a === 'go'){
+    const qs = [...hp.querySelectorAll('.hqs input:checked')].map(x => +x.value);
+    if(!qs.length){ toast('Cochez au moins une question'); return; }
+    const round = {t: 'round', id: rnd(8, 'abcdefghijklmnopqrstuvwxyz0123456789'), quiz: +$('#hquiz').value, qs, dur: +$('#hdur').value};
+    try{
+      const m = await pub(host.code, 'c', round);
+      round.at = m.time * 1000; host.rounds.push(round); saveHost();
+      ovState = {round, host: true, res: null}; renderOv();
+    }catch(_){ toast('Lancement impossible : connexion au relais ?'); }
+  }
+});
+let hostTimer = null;
+function startHost(){
+  renderHost();
+  sub(host.code, 'a', (m, meta) => {
+    if(m.p) people.add(m.p);
+    if(m.t === 'ans'){
+      const r = host.rounds.find(x => x.id === m.r);
+      if(r && meta.time * 1000 <= roundEnd(r) + 3000){ (tally[m.r] = tally[m.r] || {}); (tally[m.r][m.p] = tally[m.r][m.p] || {})[m.q] = m.a; }
+    }
+    clearTimeout(hostTimer);
+    hostTimer = setTimeout(() => { if(ovState && ovState.host && !ovState.res) renderOv(); else if(!ovState) renderHost(); }, 300);
+  });
+  const last = host.rounds[host.rounds.length - 1];
+  if(last && !last.res){ ovState = {round: last, host: true, res: null}; renderOv(); }
+}
+
+if(IS_HOST){ $('#joinbox').style.display = 'none'; if(host) startHost(); else renderHost(); }
+else if(qp.get('s')) joinLive(qp.get('s'));
+else if(live) startParticipant();
+
 
 // nav highlight
 const links = [...document.querySelectorAll('nav a[href^="#"]:not(.brand)')];
